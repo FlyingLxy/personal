@@ -1,0 +1,61 @@
+html, body, div, img, p, h1, h2, h3, h4, h5, h6, ul, ol {
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    display: table;
+    height: 100%;
+    width: 100%;
+    font-family: tahoma, arial, "Hiragino Sans GB", 宋体, sans-serif;
+    font-size: 10px;
+}
+body {
+    display: table-cell;
+}
+body {
+    
+    height: 100%;
+}
+a {
+    color: #ffffff;
+    text-decoration: none;
+}
+
+.app {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background: #00BCD4;
+    .wrapper {
+        height: 100%;
+        .user_email {
+            position: absolute !important;
+            top: 0;
+            right: 50px;
+            line-height: 50px;
+            font-size: 1.4rem;
+            font-weight: 900;
+            color: #ffffff;
+            z-index: 2;
+        }
+        .menu_btn {
+            position: absolute !important;
+            top: 0;
+            right: 0;
+            z-index: 2;
+        }
+        .drawer {
+            background-color: #00BCD4 !important;
+            color: #ffffff !important;
+            .drawer_item {
+                font-weight: bold !important;
+                color: #ffffff !important;
+                height: 60px !important;
+                line-height: 58px !important;
+                text-align: center !important;
+            }
+        }
+    }
+}
+
