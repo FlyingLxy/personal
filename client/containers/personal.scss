@@ -1,0 +1,30 @@
+.personal_inner {
+    margin: 100px auto 60px;
+    width: 60%;
+    .personal_content {
+        margin-top: 15px;
+        h3 {
+            margin: 4px 0;
+        }
+        p {
+            padding: 8px 10px 4px 0;
+            line-height: 1.4;
+        }
+        ul {
+            margin: 4px 0;
+            li {
+                padding: 6px 0;
+                fons-size: 1.6rem!important;
+                line-height: 1.4;
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 1200px) {
+    .personal_inner {
+        margin: 60px auto 60px;
+        width: 90%;
+
+    }
+}

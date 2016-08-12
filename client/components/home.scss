@@ -1,0 +1,25 @@
+.home_wrapper {
+    position: relative;
+    padding: 0 5%;
+    width: 90%;
+    height: 100%;
+    .home_inner {
+        position: absolute;
+        top: 40%;
+        margin: auto;
+        width: 90%;
+        z-index: 1;
+        .home_logo {
+            width: 100%;
+            img {
+                width: 100%;
+            }
+        }
+        p {
+            color: #80DEEA;
+            font-size: 1.8rem;
+            font-weight: bold;
+            text-align: center;
+        }
+    }
+}
