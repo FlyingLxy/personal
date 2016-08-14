@@ -228,6 +228,7 @@ class SignUp extends Component {
                                   <div style={styles.cpatchaMask}></div>
                                   <img src={this.props.signup.captcha.img} alt="captcha"
                                        style={{width:'100%',height:'100%'}}/>
+                                  {this.props.signup.captcha.text}
                               </RaisedButton>
                           </div>
 
