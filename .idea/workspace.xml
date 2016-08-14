@@ -46,8 +46,8 @@
       <file leaf-file-name="SignUpLink.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/client/containers/SignUpLink.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.8051948">
-              <caret line="230" column="64" selection-start-line="230" selection-start-column="64" selection-end-line="230" selection-end-column="64" />
+            <state vertical-scroll-proportion="0.68713105">
+              <caret line="226" column="75" selection-start-line="226" selection-start-column="75" selection-end-line="226" selection-end-column="75" />
               <folding />
             </state>
           </provider>
@@ -145,8 +145,8 @@
         <option value="$PROJECT_DIR$/server/config/local.env.js" />
         <option value="$PROJECT_DIR$/client/containers/SignInLink.js" />
         <option value="$PROJECT_DIR$/node_modules/ccap/binding.gyp" />
-        <option value="$PROJECT_DIR$/client/containers/SignUpLink.js" />
         <option value="$PROJECT_DIR$/.gitignore" />
+        <option value="$PROJECT_DIR$/client/containers/SignUpLink.js" />
       </list>
     </option>
   </component>
@@ -350,14 +350,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/node_modules/material-ui/svg-icons/navigation/menu.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.9149941">
-          <caret line="31" column="31" selection-start-line="31" selection-start-column="18" selection-end-line="31" selection-end-column="32" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/client/components/home.scss">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.31486145">
@@ -787,8 +779,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/client/containers/SignUpLink.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.8051948">
-          <caret line="230" column="64" selection-start-line="230" selection-start-column="64" selection-end-line="230" selection-end-column="64" />
+        <state vertical-scroll-proportion="0.68713105">
+          <caret line="226" column="75" selection-start-line="226" selection-start-column="75" selection-end-line="226" selection-end-column="75" />
           <folding />
         </state>
       </provider>
