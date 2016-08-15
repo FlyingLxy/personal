@@ -36,7 +36,7 @@ class Index extends Component {
         this._method().forEach(item => {
             this[item] = this[item].bind(this);
         })
-        console.log(this);
+        //console.log(this);
     }
 
     drawerOpen(e) {

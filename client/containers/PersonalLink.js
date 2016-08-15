@@ -10,7 +10,7 @@ import RaisedButton from 'material-ui/RaisedButton';
 import FlatButton from 'material-ui/FlatButton';
 import './personal.scss';
 
-import { updateStepAction } from '../actions/personalAction.js';
+import { updateStepAction,getPersonalAction } from '../actions/personalAction.js';
 const styles = {
     CardHeaderTitle: {
         color: cyan500,
@@ -43,9 +43,10 @@ class Personal extends Component {
         this._method().forEach(item => {
             this[item] = this[item].bind(this);
         })
-        console.log(this);
     }
-
+    componentWillMount() {
+        this.props.dispatch(getPersonalAction());
+    }
     nextHandle() {
         if (this.props.personal.step < 3) {
             this.props.dispatch(updateStepAction(this.props.personal.step + 1));
@@ -76,7 +77,7 @@ class Personal extends Component {
                   {
                       step > 0 && (
                             <FlatButton
-                                  label='Black'
+                                  label='Back'
                                   disableTouchRipple={true}
                                   disableFocusRipple={true}
                                   onTouchTap={this.prevHandle}
