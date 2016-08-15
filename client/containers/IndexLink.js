@@ -43,8 +43,9 @@ class Index extends Component {
         this.props.dispatch(drawerAction(true));
     }
 
-    drawerClose(e) {
+    drawerClose(path) {
         this.props.dispatch(drawerAction(false));
+        this.context.router.push(path);
     }
 
     requestChange(open) {
@@ -71,24 +72,17 @@ class Index extends Component {
                               if (this.props.user.token) {
                                   if (item.name !== '注册' && item.name !== '登录') {
                                       return (
-                                            <Link key={index} to={item.path}>
-                                                <MenuItem className='drawer_item'
-                                                          onTouchTap={this.drawerClose}>
-                                                    {item.name}
-                                                </MenuItem>
-                                            </Link>
-
+                                            <MenuItem className='drawer_item' key={index} onTouchTap={this.drawerClose.bind(this,item.path)}>
+                                                {item.name}
+                                            </MenuItem>
                                       )
                                   }
                               } else {
                                   if (item.name !== '退出登录') {
                                       return (
-                                            <Link key={index} to={item.path}>
-                                                <MenuItem className='drawer_item'
-                                                          onTouchTap={this.drawerClose}>
-                                                    {item.name}
-                                                </MenuItem>
-                                            </Link>
+                                            <MenuItem className='drawer_item' key={index} onTouchTap={this.drawerClose.bind(this,item.path)}>
+                                                {item.name}
+                                            </MenuItem>
                                       )
                                   }
                               }

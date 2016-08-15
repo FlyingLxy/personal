@@ -84,7 +84,7 @@ class SignUp extends Component {
 
     componentWillMount() {
         this.props.dispatch(captchaAction());
-        console.log(this);
+        //console.log(this);
     }
 
     //sessionToggle() {
