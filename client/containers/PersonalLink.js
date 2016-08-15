@@ -145,7 +145,7 @@ class Personal extends Component {
                                               this.props.personal.workExperience.map((item, index) => {
                                                   return (
                                                         <div key={index}>
-                                                            <div style={{marginBottom: 14}}>
+                                                            <div style={{marginBottom: 18,marginTop: 30}}>
                                                                 <span style={{fontSize:18,fontWeight:900,marginRight:6}}>{item.companyName}</span>
                                                                 <span style={{fontSize: 12,color: '#999'}}>{`${item.cycle[0]} - ${item.cycle[1]}`}</span>
                                                             </div>
@@ -154,7 +154,11 @@ class Personal extends Component {
                                                                     return (
                                                                           <ul key={'_' + index}>
                                                                               <li style={{fontWeight:900}}>{item.name}</li>
-                                                                              <li>{item.content}</li>
+                                                                              {
+                                                                                  item.content.map((item,index) => {
+                                                                                      return <li key={`__${index}`}>{`${index + 1}. ${item}`}</li>
+                                                                                  })
+                                                                              }
                                                                           </ul>
                                                                     )
                                                                 })
