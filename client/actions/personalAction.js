@@ -1,5 +1,5 @@
 import {updateStep,resPersonalInfo} from '../constants/personalConst.js';
-import $ from 'jquery';
+import request from '../common/request.js';
 
 export const updateStepAction = (step) => {
     return {
@@ -14,17 +14,11 @@ export const resPersonalAction = (info) => {
     }
 }
 export const getPersonalAction = () => {
-    return (dispatch,getState) => {
-        $.ajax('/api/personal/info',{
-            type: 'GET',
-            success: data => {
-                if (data.msg === 'ok') {
-                    dispatch(resPersonalAction(data.result));
-                }
-            },
-            error: err => {
-                console.log(err);
-            }
+    return (dispatch, getState) => {
+        request.get({path: '/api/personal/info'}).then(json=> {
+            dispatch(resPersonalAction(json.result));
+        }).catch(err => {
+            console.log(err);
         })
     }
 }

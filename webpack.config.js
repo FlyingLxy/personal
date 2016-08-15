@@ -1,16 +1,13 @@
 /**
  * Created by lxy on 16/8/10.
  */
-/**
- * Created by lxy on 16/8/10.
- */
 var path = require('path');
 var ExtractTextWebpackPlugin = require('extract-text-webpack-plugin');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 var webpack = require('webpack');
 module.exports = {
     entry: {
-        vendor: ['react', 'react-dom', 'react-router', 'redux', 'react-redux', 'redux-thunk','jquery'],
+        vendor: ['react', 'react-dom', 'react-router', 'redux', 'react-redux', 'redux-thunk','fetch-ie8'],
         index: [path.resolve(__dirname, 'client/main/index.js')]
     },
     output: {
@@ -25,7 +22,7 @@ module.exports = {
     resolveLoader: {
         root: path.resolve(__dirname, 'node_modules')
     },
-    //devtool: 'source-map',
+    devtool: false,
     module: {
         loaders: [
             {
