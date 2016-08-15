@@ -1,9 +1,15 @@
 {
-  "tab": ["介绍","技能","项目","教育"],
+  "tab": [
+    "介绍",
+    "技能",
+    "项目",
+    "教育"
+  ],
   "name": "郎啸宇",
   "age": "26",
   "tel": "18810032068",
   "skills": [
+    "熟悉HTML/CSS，能够书写语义合理，结构清晰，易维护的HTML结构",
     "熟悉JavaScript, 了解作用域链, 原型, 原型链, ES6, 闭包等应用",
     "node基本应用, 常用模块使用, 路由设计, RESTful ,express, MVC, 图片裁剪, JSON Web Token 应用, 单点登录基于redis的session持久化",
     "mongoDB基本使用, CRUD",
@@ -15,20 +21,75 @@
   "workExperience": [
     {
       "companyName": "世纪鼎利",
-      "cycle": ["2015-10","至今"],
+      "cycle": [
+        "2015-10",
+        "至今"
+      ],
       "project": [
         {
           "name": "知新网 (教育类)",
-          "content": "负责PC端Web开发, 使用Angular + node 做前后端分离架构, api采用RESTful风格,负责开发 CMS 内容管理平台, 基本使用架构类似知心网, 使用了UI框架Boot",
+          "content": [
+            "负责PC端Web开发, 使用Angular + node 做前后端分离架构, api采用RESTful风格",
+            "负责开发 CMS 内容管理平台, 基本使用架构类似知心网, 使用UI框架Boot"
+          ],
           "path": "http://www.aizhixin.com"
         },
         {
           "name": "知新点点 (学校资源管理)",
-          "content": "负责开发知新点点 CMS , 解决学校数据导入, 老师学生基本数据生成, 以及生产运行数据, 使用 Angular + node + Boot 架构"
+          "content": [
+            "负责开发知新点点 CMS , 解决学校数据导入, 老师学生基本数据生成, 以及生产运行数据, 使用 Angular + node + Boot 架构"
+          ]
         },
         {
           "name": "知新督导 (学校数据统计)",
-          "content": "负责知新督导Web开发, 采用百度第三方插件 echart 进行数据图形展示"
+          "content": [
+            "负责知新督导Web开发, 采用百度第三方插件 echart 进行数据图形展示"
+          ]
+        }
+      ]
+    },
+    {
+      "companyName": "知学",
+      "cycle": [
+        "2015-3",
+        "2015-10"
+      ],
+      "project": [
+        {
+          "name": "知学 (移动端)",
+          "content": [
+            "负责产品移动端原型设计,需求解决方案,不断优化提高提高用户体验",
+            "负责ios端,android端,web端视觉设计,交互设计,把控客户端开发流程，并制定公司html5开发规范",
+            "负责制定产品UI视觉规范并逐步完善形成文档",
+            "负责知学App用户使用手册，多元智能测试，世界脑力大赛官方报名移动端页面设计，html5+css3+js实现",
+            "负责公司所有浏览器兼容性问题"
+          ],
+          "path": ""
+        },
+        {
+          "name": "知学DIY (Web)",
+          "content": [
+            "负责产品web端设计及开发;UI框架使用bootstrap 响应式布局，适配PC及移动端",
+            "使用jQuery,并接入百度地图等第三方前端API"
+          ]
+        }
+      ]
+    },
+    {
+      "companyName": "修神马",
+      "cycle": [
+        "2014-10",
+        "2015-3"
+      ],
+      "project": [
+        {
+          "name": "修神马 (移动端)",
+          "content": [
+            "负责产品ios端,android端,web端视觉设计,交互设计",
+            "不断优化升级产品UI,提高界面视觉体验",
+            "参与产品原型设计"
+          ],
+          "path": ""
         }
       ]
     }
@@ -36,12 +97,14 @@
   "educationExperience": [
     {
       "name": "中央广播电视大学信息工程学区",
-      "graduationTime": ["2009-9", "2011-6"],
+      "graduationTime": [
+        "2009-9",
+        "2011-6"
+      ],
       "level": "大专",
       "major": "法学"
-
     }
   ],
-  "introduction": "Web前端开发 1年多, 目前技术阶段属于 (初级 -> 我 -> 中级) , 热爱编程工作, 前端也是自学, 属于兴趣驱动型, 热爱研究新技术, 希望可以找到很多志同道合的开发者一起研究学习",
+  "introduction": "1年半 Web 开发经验,目前技术阶段属于 (初级 -> 我 -> 中级) , 热爱编程工作, 强烈学习欲望. 目前主要研究方向,JavaScript, NodeJS, React, 熟悉基本的前后端分离架构, 熟悉基本node react应用, 还在进一步学习中...",
   "instructions": ""
 }
