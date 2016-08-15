@@ -71,17 +71,24 @@ class Index extends Component {
                               if (this.props.user.token) {
                                   if (item.name !== '注册' && item.name !== '登录') {
                                       return (
-                                            <MenuItem className='drawer_item' key={index} onTouchTap={this.drawerClose}>
-                                                <Link to={item.path}>{item.name}</Link>
-                                            </MenuItem>
+                                            <Link key={index} to={item.path}>
+                                                <MenuItem className='drawer_item'
+                                                          onTouchTap={this.drawerClose}>
+                                                    {item.name}
+                                                </MenuItem>
+                                            </Link>
+
                                       )
                                   }
                               } else {
                                   if (item.name !== '退出登录') {
                                       return (
-                                            <MenuItem className='drawer_item' key={index} onTouchTap={this.drawerClose}>
-                                                <Link to={item.path}>{item.name}</Link>
-                                            </MenuItem>
+                                            <Link key={index} to={item.path}>
+                                                <MenuItem className='drawer_item'
+                                                          onTouchTap={this.drawerClose}>
+                                                    {item.name}
+                                                </MenuItem>
+                                            </Link>
                                       )
                                   }
                               }
@@ -93,6 +100,9 @@ class Index extends Component {
               </div>
         )
     }
+}
+Index.contextTypes = {
+    router: React.PropTypes.object.isRequired
 }
 const mapStateToProps = (state) => {
     return {
