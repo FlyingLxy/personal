@@ -1,9 +1,9 @@
 /**
  * Created by lxy on 16/8/11.
  */
-import $ from 'jquery';
 import { getCaptcha ,sessionToggle ,checkCaptcha, errorInfo,emailErr,pwErr,signup } from '../constants/signupConst.js';
 import { auth } from '../constants/userConst.js';
+import request from '../common/request.js';
 // 获取验证码图片
 const captcha = (captcha) => {
     return {
@@ -13,18 +13,12 @@ const captcha = (captcha) => {
 }
 export const captchaAction = () => {
     return (dispatch, getState) => {
-        $.ajax('/api/account/captcha', {
-            type: 'GET',
-            success: result => {
-                if (result.msg === 'ok') {
-                    dispatch(captcha({text: result.captchaText, img: result.captchaImg}));
-                }
-            },
-            error: err => {
-                dispatch(errorAction({status: true, msg: '连接失败!请检查您的网络'}))
-                console.log(err);
-            }
-        });
+        request.get({path: '/api/account/captcha'})
+              .then(json => dispatch(captcha({text: json.captchaText, img: json.captchaImg})))
+              .catch(err => {
+                  dispatch(errorAction({status: true, msg: '连接失败!请检查您的网络'}))
+                  console.log(err);
+              })
     }
 }
 // 验证码验证
@@ -51,22 +45,15 @@ export const emailErrAction = (result = {status: false, text: ''}) => {
 // 服务端验证邮箱
 export const emailRegAction = (email) => {
     return (dispatch, getState) => {
-        $.ajax('/api/account/email', {
-            type: 'get',
-            data: {
-                email: email
-            },
-            success: result => {
-                if (result.msg === 'ok') {
-                    dispatch(emailErrAction({status: 1}));
-                } else {
-                    dispatch(emailErrAction({status: 0, text: result.msg}))
-                }
-            },
-            error: err => {
-                console.log(err);
-            }
-        })
+        request.get({path: '/api/account/email', data: {email: email}})
+              .then(json => {
+                  if (json.msg === 'ok') {
+                      dispatch(emailErrAction({status: 1}))
+                  } else {
+                      dispatch(emailErrAction({status: 0, text: json.msg}));
+                  }
+              })
+              .catch(err => console.log(err))
     }
 }
 // 密码错误提示开关
@@ -79,24 +66,15 @@ export const pwErrAction = (result = {status: false, text: ''}) => {
 // 注册验证
 export const signupAction = (userInfo) => {
     return (dispatch, getState) => {
-        $.ajax('/api/account/signup', {
-            type: 'POST',
-            data: {
-                email: userInfo.email,
-                password: userInfo.pw
-            },
-            success: data => {
-                if (data.msg === 'ok') {
-                    dispatch(authAction(data.result));
-                }else {
-                    dispatch(errorAction({status:true,msg:data.err}));
-                }
-            },
-            error: err => {
-                console.log(err);
-                dispatch(errorAction({status:true,msg:data.err}));
-            }
-        })
+        request.post({path: '/api/account/signup', data: {email: userInfo.email, password: userInfo.pw}})
+              .then(json => {
+                  if (json.msg === 'ok') {
+                      dispatch(authAction(json.result));
+                  } else {
+                      dispatch(errorAction({status: true, msg: json.err}));
+                  }
+              })
+              .catch(err =>  dispatch(errorAction({status: true, msg: err})));
     }
 }
 export const authAction = (userInfo) => {
