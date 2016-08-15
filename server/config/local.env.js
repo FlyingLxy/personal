@@ -4,10 +4,10 @@
 const env = {
     //MODE: 'development',
     MODE: 'production',
-    PORT: 3000,
+    PORT: 80,
     //HOST: '192.168.199.210',
-    HOST: 'http://172.16.33.49',
-    LOCALHOST: 'http://172.16.33.49:3000'
+    HOST: 'http://172.16.33.29',
+    LOCALHOST: 'http://172.16.33.29:3000'
 }
 
 process.env.NODE_ENV = env.MODE;
