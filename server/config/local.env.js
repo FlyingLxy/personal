@@ -2,9 +2,9 @@
  * Created by lxy on 16/8/10.
  */
 const env = {
-    //MODE: 'development',
-    MODE: 'production',
-    PORT: 80,
+    MODE: 'development',
+    //MODE: 'production',
+    PORT: 3000,
     //HOST: '192.168.199.210',
     HOST: 'http://172.16.33.29',
     LOCALHOST: 'http://172.16.33.29:3000'
