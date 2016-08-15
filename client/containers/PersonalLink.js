@@ -159,10 +159,12 @@ class Personal extends Component {
                                                                                       return <li key={`__${index}`}>{`${index + 1}. ${item}`}</li>
                                                                                   })
                                                                               }
+                                                                              <li><a href={item.path} style={{color: '#00BCD4',fontWeight:'bold'}}>{item.path}</a></li>
                                                                           </ul>
                                                                     )
                                                                 })
                                                             }
+
                                                         </div>
                                                   )
                                               })
