@@ -6,11 +6,13 @@ import React,{Component} from 'react';
 import { Link } from 'react-router';
 import Drawer from 'material-ui/Drawer';
 import IconButton from 'material-ui/IconButton';
+import FontIcon from 'material-ui/FontIcon';
 import RaisedButton from 'material-ui/RaisedButton';
 import MenuItem from 'material-ui/MenuItem';
 import AppBar from 'material-ui/AppBar';
 import NavigationClose from 'material-ui/svg-icons/navigation/close';
 import NavigationMenu from 'material-ui/svg-icons/navigation/menu';
+import ActionAutorenew from 'material-ui/svg-icons/action/autorenew.js';
 import { drawerAction } from '../actions/indexAction.js';
 import {deepOrange600,deepOrange300} from 'material-ui/styles/colors';
 import './index.scss';
@@ -19,13 +21,29 @@ import { signoutAction } from '../actions/userAction.js';
 const styles = {
     menuIcon: {
         width: 30,
-        height: 30
+        height: 30,
     },
     menu: {
-        width: 50,
+        width: 40,
         height: 50,
-        padding: 10
-    }
+        marginRight: 10,
+        padding: '10px 5px',
+        verticalAlign: 'middle',
+        textAlign: 'center'
+    },
+    gitIcon: {
+        width: 30,
+        height: 30,
+        marginTop: 2
+    },
+    git: {
+        width: 40,
+        height: 50,
+        padding: '10px 5px',
+        verticalAlign: 'middle',
+        textAlign: 'center'
+    },
+    btnColor: '#ffffff'
 }
 class Index extends Component {
     _method() {
@@ -50,7 +68,7 @@ class Index extends Component {
         if (path === '/flyingfox/signout') {
             this.props.dispatch(signoutAction());
             this.context.router.push('/flyingfox/signin');
-        }else {
+        } else {
             this.context.router.push(path);
         }
 
@@ -65,9 +83,14 @@ class Index extends Component {
               <div className='wrapper'>
                   <div className='user_email'>{this.props.user.email || ''}</div>
                   <div className='menu_btn'>
+                      <IconButton iconStyle={styles.gitIcon} style={styles.git} href='https://github.com/FlyingLxy/personal' target='_blank'>
+                          <FontIcon className='iconfont' hoverColor={styles.btnColor} color={styles.btnColor}>
+                              &#xe735;
+                          </FontIcon>
+                      </IconButton>
                       <IconButton iconStyle={styles.menuIcon} style={styles.menu}
                                   onTouchTap={this.drawerOpen}>
-                          <NavigationMenu hoverColor={'#ffffff'} color={'#ffffff'}/>
+                          <NavigationMenu hoverColor={styles.btnColor} color={styles.btnColor}/>
                       </IconButton>
                   </div>
                   <Drawer containerClassName='drawer' docked={false} width={260} openSecondary={true}
@@ -82,7 +105,8 @@ class Index extends Component {
                               if (this.props.user.token) {
                                   if (item.name !== '注册' && item.name !== '登录') {
                                       return (
-                                            <MenuItem className='drawer_item' key={index} onTouchTap={this.drawerClose.bind(this,item.path)}>
+                                            <MenuItem className='drawer_item' key={index}
+                                                      onTouchTap={this.drawerClose.bind(this,item.path)}>
                                                 {item.name}
                                             </MenuItem>
                                       )
@@ -90,7 +114,8 @@ class Index extends Component {
                               } else {
                                   if (item.name !== '退出登录') {
                                       return (
-                                            <MenuItem className='drawer_item' key={index} onTouchTap={this.drawerClose.bind(this,item.path)}>
+                                            <MenuItem className='drawer_item' key={index}
+                                                      onTouchTap={this.drawerClose.bind(this,item.path)}>
                                                 {item.name}
                                             </MenuItem>
                                       )
