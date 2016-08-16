@@ -14,6 +14,8 @@ import NavigationMenu from 'material-ui/svg-icons/navigation/menu';
 import { drawerAction } from '../actions/indexAction.js';
 import {deepOrange600,deepOrange300} from 'material-ui/styles/colors';
 import './index.scss';
+
+import { signoutAction } from '../actions/userAction.js';
 const styles = {
     menuIcon: {
         width: 30,
@@ -45,7 +47,13 @@ class Index extends Component {
 
     drawerClose(path) {
         this.props.dispatch(drawerAction(false));
-        this.context.router.push(path);
+        if (path === '/flyingfox/signout') {
+            this.props.dispatch(signoutAction());
+            this.context.router.push('/flyingfox/signin');
+        }else {
+            this.context.router.push(path);
+        }
+
     }
 
     requestChange(open) {
@@ -56,10 +64,12 @@ class Index extends Component {
         return (
               <div className='wrapper'>
                   <div className='user_email'>{this.props.user.email || ''}</div>
-                  <IconButton className='menu_btn' iconStyle={styles.menuIcon} style={styles.menu}
-                              onTouchTap={this.drawerOpen}>
-                      <NavigationMenu hoverColor={'#ffffff'} color={'#ffffff'}/>
-                  </IconButton>
+                  <div className='menu_btn'>
+                      <IconButton iconStyle={styles.menuIcon} style={styles.menu}
+                                  onTouchTap={this.drawerOpen}>
+                          <NavigationMenu hoverColor={'#ffffff'} color={'#ffffff'}/>
+                      </IconButton>
+                  </div>
                   <Drawer containerClassName='drawer' docked={false} width={260} openSecondary={true}
                           open={this.props.index.drawer}
                           onRequestChange={this.requestChange}>

@@ -1,12 +1,12 @@
 @media screen and (min-width: 1200px) {
-    .signup_card {
+    .signup_card,.signin_card {
         margin: 100px auto 0;
         width: 60%;
     }
 }
 
 @media screen and (max-width: 1200px) {
-    .signup_card {
+    .signup_card,.signin_card {
         margin: 60px auto 0;
         width: 90%;
         .captcha {

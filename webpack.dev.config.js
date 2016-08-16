@@ -13,7 +13,7 @@ module.exports = {
     output: {
         path: path.resolve(__dirname,'dist/public'),
         filename: 'js/[name].js',
-        publicPath: '/'
+        publicPath: '/flyingfox'
     },
     resolve: {
         extensions: ['','.js','.jsx','.scss'],

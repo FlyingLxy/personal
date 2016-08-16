@@ -8,7 +8,7 @@ const controller = require('./account.controller');
 var router = express.Router();
 
 router.post('/signup',controller.signup);
+router.post('/signin',controller.signin);
 router.get('/captcha',controller.captcha);
 router.get('/email',controller.email);
-
 module.exports = router;

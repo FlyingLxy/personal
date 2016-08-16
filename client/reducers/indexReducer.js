@@ -5,26 +5,30 @@ const initialState = {
     tab: [
         {
             name: '首页',
-            path: '/'
+            path: '/flyingfox'
 
         },
         {
             name: '个人简介',
-            path: '/personal'
+            path: '/flyingfox/personal'
 
         },
         {
+            name: '小黑屋',
+            path: '/flyingfox/blackhouse'
+        },
+        {
             name: '登录',
-            path: '/signin'
+            path: '/flyingfox/signin'
 
         },
         {
             name: '注册',
-            path: '/signup'
+            path: '/flyingfox/signup'
         },
         {
             name: '退出登录',
-            path: '/signout'
+            path: '/flyingfox/signout'
         }
     ],
     drawer: false

@@ -1,33 +1,11 @@
 /**
  * Created by lxy on 16/8/11.
  */
-import { getCaptcha ,sessionToggle ,checkCaptcha, errorInfo,emailErr,pwErr,signup } from '../constants/signupConst.js';
+import { sessionToggle ,errorInfo,emailErr,pwErr,signup } from '../constants/signupConst.js';
 import { auth } from '../constants/userConst.js';
 import request from '../common/request.js';
-// 获取验证码图片
-const captcha = (captcha) => {
-    return {
-        type: getCaptcha,
-        captcha
-    }
-}
-export const captchaAction = () => {
-    return (dispatch, getState) => {
-        request.get({path: '/api/account/captcha'})
-              .then(json => dispatch(captcha({text: json.captchaText, img: json.captchaImg})))
-              .catch(err => {
-                  dispatch(errorAction({status: true, msg: '连接失败!请检查您的网络'}))
-                  console.log(err);
-              })
-    }
-}
-// 验证码验证
-export const checkCaptchaAction = (result) => {
-    return {
-        type: checkCaptcha,
-        result: result
-    }
-}
+import { errorAction } from './errorAction.js';
+import { setSessionAction } from './userAction.js';
 //session toggle
 //export const sessionAction = (toggle) => {
 //    return {
@@ -69,7 +47,7 @@ export const signupAction = (userInfo) => {
         request.post({path: '/api/account/signup', data: {email: userInfo.email, password: userInfo.pw}})
               .then(json => {
                   if (json.msg === 'ok') {
-                      dispatch(authAction(json.result));
+                      dispatch(setSessionAction(json.result));
                   } else {
                       dispatch(errorAction({status: true, msg: json.err}));
                   }
@@ -77,16 +55,5 @@ export const signupAction = (userInfo) => {
               .catch(err =>  dispatch(errorAction({status: true, msg: err})));
     }
 }
-export const authAction = (userInfo) => {
-    return {
-        type: auth,
-        user: userInfo
-    }
-}
-// 错误信息弹窗
-export const errorAction = (error) => {
-    return {
-        type: errorInfo,
-        error
-    }
-}
+
+
