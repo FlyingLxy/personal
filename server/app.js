@@ -17,19 +17,21 @@ if (process.env.NODE_ENV === 'development') {
     const compiler = webpack(webpackDevConfig);
     app.use(WebpackDevMiddleware(compiler,{
         publicPath: webpackDevConfig.output.publicPath,
-        stats: {color: true},
-        hot: true
+        hot: true,
     }));
     app.use(WebpackHotMiddleware(compiler,{
         log: console.log
     }));
-    app.get(['/','/signup','/signin','/personal'],(req,res) => {
-
-        res.redirect(process.env.LOCALHOST);
+    app.get('/',(req,res) => {
+        res.redirect('/flyingfox')
+    })
+    app.get('/flyingfox/*',(req,res) => {
+        res.redirect('/flyingfox');
     })
 }else {
     app.use('/public',express.static(path.resolve(__dirname,'../dist/public')));
-    app.get(['/','/signup','/signin','/personal'],routes.showIndex);
+    app.get('/',(req,res) => res.redirect('/flyingfox'));
+    app.get(['/flyingfox','/flyingfox/*'],routes.showIndex);
 }
 app.use(bodyParser.json({limit: '5mb'}));
 app.use(bodyParser.urlencoded({extended: true, limit: '5mb'}));

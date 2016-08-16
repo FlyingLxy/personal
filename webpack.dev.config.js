@@ -7,13 +7,13 @@ var HtmlWebpackPlugin = require('html-webpack-plugin');
 var webpack = require('webpack');
 module.exports = {
     entry: {
-        vendor: ['react', 'react-dom', 'react-router', 'material-ui', 'redux', 'react-redux', 'redux-thunk','jquery'],
+        vendor: ['react', 'react-dom', 'react-router', 'redux', 'react-redux', 'redux-thunk'],
         index: ['webpack-hot-middleware/client', path.resolve(__dirname, 'client/main/index.js')]
     },
     output: {
         path: path.resolve(__dirname,'dist/public'),
         filename: 'js/[name].js',
-        publicPath: '/'
+        publicPath: '/flyingfox'
     },
     resolve: {
         extensions: ['','.js','.jsx','.scss'],
@@ -42,7 +42,7 @@ module.exports = {
             },
             {
                 test: /\.(woff|svg|eot|ttf)\??.*$/,
-                loader: 'url-loader?limit=50000&name=font/[name].[ext]',
+                loader: 'url-loader?limit=500000&name=font/[name].[ext]',
                 exclude: /node_modules/
             },
             {

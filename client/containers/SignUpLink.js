@@ -9,66 +9,13 @@ import RaisedButton from 'material-ui/RaisedButton';
 import Snackbar from 'material-ui/Snackbar';
 import Toggle from 'material-ui/Toggle';
 import Paper from 'material-ui/Paper';
-import { cyan50,cyan100,cyan200,cyan300,cyan500,cyan700 } from 'material-ui/styles/colors';
-import './signup.scss';
+import './sign.scss';
+import styles from './signStyle.js';
+import { checkemail,checkpw } from '../common/check.js';
+import { sessionAction,emailErrAction,emailRegAction,pwErrAction,signupAction } from '../actions/signupAction.js';
+import { captchaAction,checkCaptchaAction } from '../actions/captchaAction.js';
+import { errorAction } from '../actions/errorAction.js';
 
-import {checkemail,checkpw} from '../common/check.js';
-import { captchaAction,sessionAction,checkCaptchaAction,emailErrAction,emailRegAction,pwErrAction,signupAction } from '../actions/signupAction.js';
-const styles = {
-    cardHeaderTitle: {
-        color: cyan500,
-        fontSize: 24,
-        paddingBottom: 6
-    },
-    subTitle: {
-        color: cyan100
-    },
-    cardHeader: {
-        paddingLeft: 26,
-        paddingRight: 26,
-        paddingTop: 20,
-        paddingBottom: 20
-    },
-    cardText: {
-        paddingLeft: 26,
-        paddingRight: 26,
-        paddingTop: 0
-    },
-    cardAction: {
-        marginTop: 10,
-        paddingLeft: 26,
-        paddingRight: 26,
-        paddingBottom: 20
-    },
-    toggleTable: {
-        color: cyan500,
-    },
-    toggle: {
-        marginTop: 20
-    },
-    input: {
-        color: cyan500,
-        fontWeight: 900,
-        outline: 'none',
-        WebkitBoxShadow: '0 0 0px 1000px white inset'
-    },
-    captcha: {
-        position: 'relative',
-        marginTop: 22,
-        marginLeft: '2%',
-        width: '18%',
-        height: 40,
-        textAlign: 'center',
-        display: 'inline-block',
-        verticalAlign: 'top'
-    },
-    cpatchaMask: {
-        width: '100%',
-        height: '100%',
-        background: 'rgba(0,188,211,.4)',
-        position: 'absolute'
-    }
-}
 class SignUp extends Component {
     _method() {
         return ['updateCaptcha', 'checkCaptcha', 'reCaptcha', 'emailBlurHandle', 'pwBlurHandle', 'signupHandle']
@@ -76,6 +23,7 @@ class SignUp extends Component {
 
     constructor(props) {
         super(props);
+
         this._method = this._method.bind(this);
         this._method().forEach(item => {
             this[item] = this[item].bind(this);
@@ -83,6 +31,10 @@ class SignUp extends Component {
     }
 
     componentWillMount() {
+        if (this.props.user.token) {
+            this.context.router.push('/flyingfox');
+            return;
+        }
         this.props.dispatch(captchaAction());
         //console.log(this);
     }
@@ -94,10 +46,13 @@ class SignUp extends Component {
     //}
     shouldComponentUpdate(nextProps, nextState) {
         if (nextProps.user.token !== this.props.user.token) {
-            this.context.router.push({},'/');
+            this.context.router.push('/flyingfox');
             return false;
         }
         return true;
+    }
+    componentWillUnmount() {
+        this.props.dispatch(checkCaptchaAction(false));
     }
     updateCaptcha() {
         // 更新验证码 并重置 验证码 input
@@ -110,7 +65,7 @@ class SignUp extends Component {
     checkCaptcha() {
         // 检查验证码输入是否正确
         if (this.refs.captchaInput.input.value !== '') {
-            if (this.refs.captchaInput.input.value.toLowerCase() === this.props.signup.captcha.text.toLowerCase()) {
+            if (this.refs.captchaInput.input.value.toLowerCase() === this.props.captcha.text.toLowerCase()) {
                 this.props.dispatch(checkCaptchaAction(1));
             } else {
                 this.props.dispatch(checkCaptchaAction(0));
@@ -149,13 +104,20 @@ class SignUp extends Component {
     }
 
     signupHandle() {
-        console.log(this.props.signup);
         let signupInfo = this.props.signup;
-        if (signupInfo.checkCaptcha === 1 && signupInfo.email.status === 1 && signupInfo.pw.status === 1) {
+        let email = this.refs['email'].input;
+        let pw = this.refs['pw'].input;
+        let captcha = this.refs['captchaInput'].input
+        this.checkCaptcha();
+        if (this.props.captcha.checkCaptcha === 1 && signupInfo.email.status === 1 && signupInfo.pw.status === 1 && email.value !== '' && pw.value !== '' && captcha.value !== '') {
             this.props.dispatch(signupAction({
-                email: this.refs.email.input.value,
-                pw: this.refs.pw.input.value
+                email: email.value.toString(),
+                pw: pw.value.toString()
             }));
+            this.props.dispatch(captchaAction());
+            captcha.value = '';
+        } else {
+            this.props.dispatch(errorAction({status: true, msg: '请输入格式正确的邮箱 | 密码 |验证码'}))
         }
     }
 
@@ -175,11 +137,11 @@ class SignUp extends Component {
                                 ref='email'
                                 hintText='注意区分大小写'
                                 floatingLabelText='请输入您的邮箱'
-                                hintStyle={{color:cyan100}}
-                                floatingLabelFocusStyle={{color:cyan500}}
-                                floatingLabelStyle={{color:cyan100}}
-                                underlineFocusStyle={{borderColor:cyan500}}
-                                underlineStyle={{borderColor:cyan100}}
+                                hintStyle={styles.fontCyan100}
+                                floatingLabelFocusStyle={styles.fontCyan500}
+                                floatingLabelStyle={styles.fontCyan100}
+                                underlineFocusStyle={styles.borderCyan500}
+                                underlineStyle={styles.borderCyan100}
                                 inputStyle={styles.input}
                                 fullWidth={true}
                                 autoComplete='off'
@@ -191,11 +153,11 @@ class SignUp extends Component {
                                 ref='pw'
                                 hintText='8 - 20位'
                                 floatingLabelText='请输入您的密码'
-                                hintStyle={{color:cyan100}}
-                                floatingLabelFocusStyle={{color:cyan500}}
-                                floatingLabelStyle={{color:cyan100}}
-                                underlineFocusStyle={{borderColor:cyan500}}
-                                underlineStyle={{borderColor:cyan100}}
+                                hintStyle={styles.fontCyan100}
+                                floatingLabelFocusStyle={styles.fontCyan500}
+                                floatingLabelStyle={styles.fontCyan100}
+                                underlineFocusStyle={styles.borderCyan500}
+                                underlineStyle={styles.borderCyan100}
                                 inputStyle={styles.input}
                                 fullWidth={true}
                                 type='password'
@@ -210,24 +172,24 @@ class SignUp extends Component {
                                     className='captcha_input'
                                     hintText='点击图片更换验证码'
                                     floatingLabelText='验证码'
-                                    hintStyle={{color:cyan100}}
-                                    floatingLabelFocusStyle={{color:cyan500}}
-                                    floatingLabelStyle={{color:cyan100}}
-                                    underlineFocusStyle={{borderColor:cyan500}}
-                                    underlineStyle={{borderColor:cyan100}}
+                                    hintStyle={styles.fontCyan100}
+                                    floatingLabelFocusStyle={styles.fontCyan500}
+                                    floatingLabelStyle={styles.fontCyan100}
+                                    underlineFocusStyle={styles.borderCyan500}
+                                    underlineStyle={styles.borderCyan100}
                                     inputStyle={styles.input}
                                     style={{width:'80%'}}
                                     fullWidth={false}
                                     autoComplete='off'
-                                    errorText={this.props.signup.checkCaptcha === 0 ? '验证码错误':''}
+                                    errorText={this.props.captcha.checkCaptcha === 0 ? '验证码错误':''}
                                     onFocus={this.reCaptcha}
                                     onBlur={this.checkCaptcha}
                                     />
                               <RaisedButton className='captcha_img' style={styles.captcha}
                                             onTouchTap={this.updateCaptcha}>
-                                  <div style={styles.cpatchaMask}></div>
-                                  <img src={this.props.signup.captcha.img} alt="captcha"
-                                       style={{width:'100%',height:'100%'}}/>
+                                  <div style={styles.captchaMask}></div>
+                                  <img src={this.props.captcha.img} alt="captcha"
+                                       style={styles.captchaImg}/>
                               </RaisedButton>
                           </div>
 
@@ -236,9 +198,10 @@ class SignUp extends Component {
                           <RaisedButton label='Sign Up' secondary={true} onTouchTap={this.signupHandle}></RaisedButton>
                       </CardActions>
                       <Snackbar
-                            open={this.props.signup.error.status}
-                            message={this.props.signup.error.msg}
+                            open={this.props.error.status}
+                            message={this.props.error.msg}
                             autoHideDuration={5000}
+                            onRequestClose={(open) => { this.props.error.status ? this.props.dispatch(errorAction({status: false, msg: ''})) : false }}
                             />
                   </Card>
               </div>
@@ -252,7 +215,9 @@ SignUp.contextTypes = {
 const mapStateToProps = state => {
     return {
         signup: state.signup,
-        user: state.user
+        user: state.user,
+        captcha: state.captcha,
+        error: state.error
     }
 }
 const SignUpLink = connect(mapStateToProps)(SignUp);

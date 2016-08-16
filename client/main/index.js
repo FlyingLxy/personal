@@ -17,17 +17,19 @@ import Home from '../components/Home.js';
 import SignUpLink from '../containers/SignUpLink.js';
 import SignInLink from '../containers/SignInLink.js';
 import PersonalLink from '../containers/PersonalLink.js';
+import BlackhouseLink from '../containers/BlackhouseLink.js';
 const store = createStoreWithMiddleware(rootReducers);
 
 render(
       <MuiThemeProvider>
           <Provider store={store}>
               <Router history={browserHistory}>
-                  <Route path='/' component={IndexLink}>
+                  <Route path='/flyingfox' component={IndexLink}>
                       <IndexRoute component={Home}/>
-                      <Route path='/personal' component={PersonalLink}></Route>
-                      <Route path='/signup' component={SignUpLink}></Route>
-                      <Route path='/signin' component={SignInLink}></Route>
+                      <Route path='personal' component={PersonalLink}></Route>
+                      <Route path='blackhouse' component={BlackhouseLink}></Route>
+                      <Route path='signup' component={SignUpLink}></Route>
+                      <Route path='signin' component={SignInLink}></Route>
                   </Route>
               </Router>
           </Provider>

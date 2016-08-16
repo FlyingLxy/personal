@@ -4,6 +4,7 @@
 const jwt = require('jwt-simple');
 const crypto = require('crypto');
 const secret = require('../config/setting.js').SECRET;
+// 生成json web token
 exports.jwt = arg => {
     let token = jwt.encode({
         id: arg.id,
@@ -16,7 +17,16 @@ exports.jwt = arg => {
     }, secret);
     return token;
 }
-exports.md5 = pw => {
+exports.dejwt = token => {
+    let detoken = jwt.decode(token,secret);
+    return detoken;
+}
+// md5 加密
+const encipher = pw => {
     let password = crypto.createHash('md5').update(pw).digest('base64');
     return password;
 };
+// 生成加密密码
+exports.md5 = pw => {
+    return encipher(encipher(pw).slice(7) + encipher(pw))
+}
