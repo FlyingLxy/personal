@@ -45,22 +45,16 @@ export const pwErrAction = (result = {status: false, text: ''}) => {
 // 注册验证
 export const signupAction = (userInfo) => {
     return (dispatch, getState) => {
-        let captcha = getState().captcha.checkCaptcha;
-        let signup = getState().signup;
-        if (captcha === 1 && signup.email.status === 1 && signup.pw.status === 1) {
-            request.post({path: '/api/account/signup', data: {email: userInfo.email, password: userInfo.pw}})
-                  .then(json => {
-                      if (json.msg === 'ok') {
-                          history.push('/flyingfox');
-                          dispatch(setLocalAction(json.result));
-                      } else {
-                          dispatch(errorAction({status: true, msg: json.err}));
-                      }
-                  })
-                  .catch(err =>  dispatch(errorAction({status: true, msg: err})));
-        }else {
-            dispatch(errorAction({status:true,msg: '请输入格式正确的邮箱 | 密码 |验证码'}));
-        }
+        request.post({path: '/api/account/signup', data: {email: userInfo.email, password: userInfo.pw}})
+              .then(json => {
+                  if (json.msg === 'ok') {
+                      history.push('/flyingfox');
+                      dispatch(setLocalAction(json.result));
+                  } else {
+                      dispatch(errorAction({status: true, msg: json.err}));
+                  }
+              })
+              .catch(err =>  dispatch(errorAction({status: true, msg: err})));
     }
 }
 

@@ -1,7 +1,7 @@
 /**
  * Created by lxy on 16/8/16.
  */
-import { setLocal,setSession,signout,auth,authOverdue,errText } from '../constants/userConst.js';
+import { setLocal,signout,auth,authOverdue,errText } from '../constants/userConst.js';
 import { errorAction } from './errorAction.js';
 import request from '../common/request.js';
 import history from '../store/history.js';

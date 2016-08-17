@@ -95,10 +95,7 @@ class SignIn extends Component {
         let email = this.refs['email'].input;
         let pw = this.refs['pw'].input;
         let captcha = this.refs['captchaInput'].input;
-        this.emailBlurHandle();
-        this.pwBlurHandle();
-        this.checkCaptcha();
-        if (email.value !== '' && pw.value !== '' && captcha.value != '') {
+        if (checkemail(email.value) && checkpw(pw.value) && captcha.value.toLowerCase() === this.props.captcha.text.toLowerCase()) {
             this.props.dispatch(signinAction({
                 email: email.value.toString(),
                 pw: pw.value.toString()
