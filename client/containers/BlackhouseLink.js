@@ -4,6 +4,7 @@
 
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { authAction } from '../actions/userAction.js';
 const styles = {
     wrapper: {
         position: 'absolute',
@@ -19,6 +20,9 @@ class Blackhouse extends Component {
     constructor(props) {
         super(props);
     }
+    componentWillMount() {
+        this.props.dispatch(authAction());
+    }
     render() {
         return (
               <span style={styles.wrapper}>
@@ -27,7 +31,11 @@ class Blackhouse extends Component {
         )
     }
 }
-
-const BlackhouseLink = connect()(Blackhouse);
+const mapStateToProps = state => {
+    return {
+        user: state.user
+    }
+}
+const BlackhouseLink = connect(mapStateToProps)(Blackhouse);
 
 export default BlackhouseLink;

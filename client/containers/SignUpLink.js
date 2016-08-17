@@ -44,13 +44,7 @@ class SignUp extends Component {
     //    this.props.dispatch(sessionAction({sessionToggle: !this.props.signup.session}));
     //    console.log(this);
     //}
-    shouldComponentUpdate(nextProps, nextState) {
-        if (nextProps.user.token !== this.props.user.token) {
-            this.context.router.push('/flyingfox');
-            return false;
-        }
-        return true;
-    }
+
     componentWillUnmount() {
         this.props.dispatch(checkCaptchaAction(false));
     }
@@ -104,12 +98,13 @@ class SignUp extends Component {
     }
 
     signupHandle() {
-        let signupInfo = this.props.signup;
         let email = this.refs['email'].input;
         let pw = this.refs['pw'].input;
-        let captcha = this.refs['captchaInput'].input
+        let captcha = this.refs['captchaInput'].input;
+        this.emailBlurHandle();
+        this.pwBlurHandle();
         this.checkCaptcha();
-        if (this.props.captcha.checkCaptcha === 1 && signupInfo.email.status === 1 && signupInfo.pw.status === 1 && email.value !== '' && pw.value !== '' && captcha.value !== '') {
+        if (email.value !== '' && pw.value !== '' && captcha.value !== '') {
             this.props.dispatch(signupAction({
                 email: email.value.toString(),
                 pw: pw.value.toString()

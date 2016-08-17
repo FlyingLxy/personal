@@ -9,8 +9,7 @@ const headers = {
     'Accept-Encoding': 'gzip, deflate',
     'Accept-Language':'zh-CN,zh;q=0.8,en;q=0.6',
     'Connection': 'keep-alive',
-    'Content-Type': 'application/json;charset=UTF-8',
-    'Authorization': ''
+    'Content-Type': 'application/json;charset=UTF-8'
 };
 const checkStatus = respones => {
     if (respones.status >= 200 && respones.status < 300) {
@@ -32,14 +31,18 @@ const request = (option) => {
         }).join('&') : '';
         return fetch(`${option.path}?${query}`,{
             method: option.method,
-            headers: headers,
+            headers: Object.assign({},headers,{
+                'Authorization': option.token || ''
+            }),
             mode: 'cors',
             credentials: 'include'
         })
     }else {
         return fetch(option.path,{
             method: option.method,
-            headers: headers,
+            headers: Object.assign({},headers,{
+                'Authorization': option.token || ''
+            }),
             mode: 'cors',
             credentials: 'include',
             body: option.data ? JSON.stringify(option.data) : ''

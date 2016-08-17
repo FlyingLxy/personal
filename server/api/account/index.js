@@ -4,11 +4,12 @@
 
 const express = require('express');
 const controller = require('./account.controller');
-
+const auth = require('../../middleware/auth');
 var router = express.Router();
 
 router.post('/signup',controller.signup);
 router.post('/signin',controller.signin);
 router.get('/captcha',controller.captcha);
 router.get('/email',controller.email);
+router.post('/authorization',auth.verify,controller.authorization)
 module.exports = router;

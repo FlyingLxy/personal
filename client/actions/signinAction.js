@@ -5,12 +5,14 @@ import { sessionToggle, emailErr, pwErr } from '../constants/signinConst.js';
 import { setSessionAction,setLocalAction } from './userAction.js';
 import { errorAction } from './errorAction.js';
 import request from '../common/request.js';
+import history from '../store/history.js';
 export const sessionAction = session => {
     return {
         type: sessionToggle,
         session
     }
 }
+
 // 邮箱错误提示开关
 export const emailErrAction = (result = {status: false, text: ''}) => {
     return {
@@ -31,28 +33,29 @@ export const pwErrAction = (result = {status: false, text: ''}) => {
 // 登录
 export const signinAction = info => {
     return (dispatch, getState) => {
-        // 请求
-        request.post({path: '/api/account/signin', data: {email: info.email, password: info.pw, session: info.session}})
-        .then(json => {
-                  if (json.msg === 'ok') {
-                      if (info.session) {
-                          // 自动登录
+        let captcha = getState().captcha.checkCaptcha;
+        let signin = getState().signin;
+        if  (captcha === 1 && signin.email.status === 1 && signin.pw.status === 1) {
+            // 请求
+            request.post({path: '/api/account/signin', data: {email: info.email, password: info.pw, session: info.session}})
+                  .then(json => {
+                      if (json.msg === 'ok') {
                           dispatch(setLocalAction(json.result));
-                      }else {
-                          // 临时登录
-                          dispatch(setSessionAction(json.result));
+                          history.push('/flyingfox');
+                      }else if (json.msg === '1') {
+                          // 密码错误
+                          dispatch(pwErrAction({status: 0,text: json.result}));
+                      }else if (json.msg === '0') {
+                          // 邮箱错误
+                          dispatch(emailErrAction({status: 0,text: json.result}));
                       }
-                  }else if (json.msg === '1') {
-                      // 密码错误
-                      dispatch(pwErrAction({status: 0,text: json.result}))
-                  }else if (json.msg === '0') {
-                      // 邮箱错误
-                      dispatch(emailErrAction({status: 0,text: json.result}));
-                  }
-              })
-              .catch(err => {
-                  dispatch(errorAction({status: true, text: '请检查网络连接'}));
-                  console.log(err);
-              })
+                  })
+                  .catch(err => {
+                      dispatch(errorAction({status: true, text: '请检查网络连接'}));
+                      console.log(err);
+                  })
+        }else {
+            dispatch(errorAction({status:true,msg: '请输入格式正确的邮箱 | 密码 |验证码'}));
+        }
     }
 }
