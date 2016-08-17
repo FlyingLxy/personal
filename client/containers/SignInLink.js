@@ -10,16 +10,19 @@ import RaisedButton from 'material-ui/RaisedButton';
 import Snackbar from 'material-ui/Snackbar';
 import Toggle from 'material-ui/Toggle';
 import Paper from 'material-ui/Paper';
+import Dialog from 'material-ui/Dialog';
+import FlatButton from 'material-ui/FlatButton';
 import styles from './signStyle.js';
 import './sign.scss';
 import { checkemail,checkpw } from '../common/check.js';
 
 import { sessionAction,emailErrAction,pwErrAction,signinAction } from '../actions/signinAction.js';
+import { userErrAction } from '../actions/userAction.js';
 import { captchaAction,checkCaptchaAction } from '../actions/captchaAction.js';
 import { errorAction } from '../actions/errorAction.js';
 class SignIn extends Component {
     _method() {
-        return ['updateCaptcha','emailBlurHandle', 'pwBlurHandle', 'checkCaptcha', 'signupHandle', 'signinHandle']
+        return ['updateCaptcha', 'emailBlurHandle', 'pwBlurHandle', 'checkCaptcha', 'signupHandle', 'signinHandle', 'dialogClose']
     }
 
     constructor(props) {
@@ -38,13 +41,6 @@ class SignIn extends Component {
         this.props.dispatch(captchaAction());
     }
 
-    shouldComponentUpdate(nextProps, nextState) {
-        if (nextProps.user.token !== this.props.user.token) {
-            this.context.router.push('/flyingfox');
-            return false;
-        }
-        return true;
-    }
 
     componentWillUnmount() {
         this.props.dispatch(checkCaptchaAction(false));
@@ -75,6 +71,7 @@ class SignIn extends Component {
             this.props.dispatch(pwErrAction({status: false}));
         }
     }
+
     updateCaptcha() {
         // 更新验证码 并重置 验证码 input
         this.props.dispatch(captchaAction());
@@ -82,6 +79,7 @@ class SignIn extends Component {
         this.props.dispatch(checkCaptchaAction(false));
 
     }
+
     checkCaptcha() {
         // 检查验证码输入是否正确
         if (this.refs['captchaInput'].input.value !== '') {
@@ -94,16 +92,16 @@ class SignIn extends Component {
     }
 
     signinHandle() {
-        let signinInfo = this.props.signin;
         let email = this.refs['email'].input;
         let pw = this.refs['pw'].input;
         let captcha = this.refs['captchaInput'].input;
+        this.emailBlurHandle();
+        this.pwBlurHandle();
         this.checkCaptcha();
-        if (this.props.captcha.checkCaptcha === 1 && signinInfo.email.status === 1 && signinInfo.pw.status === 1 && email.value !== '' && pw.value !== '' && captcha.value != '') {
+        if (email.value !== '' && pw.value !== '' && captcha.value != '') {
             this.props.dispatch(signinAction({
                 email: email.value.toString(),
-                pw: pw.value.toString(),
-                session: signinInfo.session
+                pw: pw.value.toString()
             }));
             this.props.dispatch(captchaAction());
             captcha.value = '';
@@ -111,12 +109,21 @@ class SignIn extends Component {
             this.props.dispatch(errorAction({status: true, msg: '请输入格式正确的邮箱 | 密码 |验证码'}))
         }
     }
-
+    dialogClose() {
+        this.props.dispatch(userErrAction(''));
+    }
     signupHandle() {
         this.context.router.push('/flyingfox/signup');
     }
 
     render() {
+        const actions = [
+            <FlatButton
+                  label="OK"
+                  primary={true}
+                  onTouchTap={this.dialogClose}
+                  />
+        ]
         return (
               <div className='signin_card'>
                   <Card>
@@ -203,9 +210,18 @@ class SignIn extends Component {
                       <Snackbar
                             open={this.props.error.status}
                             message={this.props.error.msg}
-                            autoHideDuration={5000}
-                            onRequestClose={(open) => { this.props.error.status ? this.props.dispatch(errorAction({status: false, msg: ''})) : false }}
+                            autoHideDuration={3000}
+                            onRequestClose={(open) => {
+                                        this.props.error.status ? this.props.dispatch(errorAction({status: false, msg: ''})) : false
+                                    }}
                             />
+                      <Dialog
+                            actions={actions}
+                            modal={false}
+                            open={this.props.user.err != ''}
+                            >
+                          {this.props.user.err}
+                      </Dialog>
                   </Card>
               </div>
         )

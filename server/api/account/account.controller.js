@@ -112,5 +112,8 @@ module.exports = {
             res.status(501).json({msg: err});
             console.log(err);
         })
+    },
+    authorization: (req,res) => {
+        res.json({msg: 'ok'})
     }
 }

@@ -7,11 +7,11 @@ import rootReducers from '../reducers/rootReducer.js';
 import { Provider } from 'react-redux';
 import React from 'react';
 import ReactDOM,{render} from 'react-dom';
-import { Router,Route,browserHistory,IndexRoute } from 'react-router';
+import { Router,Route,IndexRoute } from 'react-router';
+import history from '../store/history.js';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider.js';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 injectTapEventPlugin();
-
 import IndexLink from '../containers/IndexLink.js';
 import Home from '../components/Home.js';
 import SignUpLink from '../containers/SignUpLink.js';
@@ -23,7 +23,7 @@ const store = createStoreWithMiddleware(rootReducers);
 render(
       <MuiThemeProvider>
           <Provider store={store}>
-              <Router history={browserHistory}>
+              <Router history={history}>
                   <Route path='/flyingfox' component={IndexLink}>
                       <IndexRoute component={Home}/>
                       <Route path='personal' component={PersonalLink}></Route>

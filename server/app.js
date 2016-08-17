@@ -26,7 +26,7 @@ if (process.env.NODE_ENV === 'development') {
         res.redirect('/flyingfox')
     })
     app.get('/flyingfox/*',(req,res) => {
-        res.redirect('/flyingfox');
+        res.redirect(process.env.LOCALHOST);
     })
 }else {
     app.use('/public',express.static(path.resolve(__dirname,'../dist/public')));
