@@ -1,9 +1,9 @@
 /**
  * Created by lxy on 16/8/12.
  */
-import { auth,setLocal,setSession,signout,authOverdue,errText } from '../constants/userConst.js';
+import { auth,setLocal,signout,authOverdue,errText } from '../constants/userConst.js';
 
-const userInfo = JSON.parse(window.localStorage.getItem('user') || window.sessionStorage.getItem('user')) || {};
+const userInfo = JSON.parse(window.localStorage.getItem('user')) || {};
 const initialState = {
     id: userInfo.id || '',
     email: userInfo.email || '',
@@ -19,15 +19,7 @@ const user = (state = initialState, action = undefined) => {
                 email: action.user.email,
                 token: action.user.token
             })
-        case setSession:
-            window.sessionStorage.setItem('user', JSON.stringify(action.user));
-            return Object.assign({}, state, {
-                id: action.user.id,
-                email: action.user.email,
-                token: action.user.token
-            })
         case signout:
-            window.sessionStorage.removeItem('user');
             window.localStorage.removeItem('user');
             return Object.assign({}, state, {
                 id: '',
