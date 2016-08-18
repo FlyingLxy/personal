@@ -5,23 +5,19 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { authAction } from '../actions/userAction.js';
-const styles = {
-    wrapper: {
-        position: 'absolute',
-        top: '50%',
-        left: '50%',
-        marginTop: '-22px',
-        marginLeft: '-60px',
-        fontSize: 30,
-        color: '#ffffff',
-    }
-}
+import { errorAction } from '../actions/errorAction.js';
+import styles from './blackhouseStyles.js';
 class Blackhouse extends Component {
     constructor(props) {
         super(props);
     }
     componentWillMount() {
-        this.props.dispatch(authAction());
+        if (this.props.user.token) {
+            this.props.dispatch(authAction());
+        }else {
+            this.context.router.push('/flyingfox/signin');
+            this.props.dispatch(errorAction({status: true, msg: '您还未登录, 小黑屋需要登录后访问!'}))
+        }
     }
     render() {
         return (
@@ -30,6 +26,9 @@ class Blackhouse extends Component {
               </span>
         )
     }
+}
+Blackhouse.contextTypes = {
+    router: React.PropTypes.object.isRequired
 }
 const mapStateToProps = state => {
     return {

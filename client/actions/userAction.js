@@ -11,12 +11,7 @@ export const setLocalAction = user => {
         user
     }
 }
-export const setSessionAction = user => {
-    return {
-        type: setSession,
-        user
-    }
-}
+
 export const signoutAction = () => {
     return {
         type: signout

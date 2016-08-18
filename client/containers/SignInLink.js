@@ -12,7 +12,7 @@ import Toggle from 'material-ui/Toggle';
 import Paper from 'material-ui/Paper';
 import Dialog from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
-import styles from './signStyle.js';
+import styles from './signStyles.js';
 import './sign.scss';
 import { checkemail,checkpw } from '../common/check.js';
 
@@ -39,6 +39,7 @@ class SignIn extends Component {
             return;
         }
         this.props.dispatch(captchaAction());
+        this.props.dispatch(sessionAction(false));
     }
 
 

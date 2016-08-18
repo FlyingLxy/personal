@@ -30,6 +30,7 @@ module.exports = {
     },
     signin: (req, res) => {
         let user = userInfo(req.body, req.ip, req.headers);
+        console.log(user);
         // 查询用户是否存在
         db.find('user', {email: user.email})
               .then(result => {
