@@ -33,8 +33,9 @@ export const pwErrAction = (result = {status: false, text: ''}) => {
 // 登录
 export const signinAction = info => {
     return (dispatch, getState) => {
+
         // 请求
-        request.post({path: '/api/account/signin', data: {email: info.email, password: info.pw, session: info.session}})
+        request.post({path: '/api/account/signin', data: {email: info.email, password: info.pw, session: getState().signin.session}})
               .then(json => {
                   if (json.msg === 'ok') {
                       dispatch(setLocalAction(json.result));

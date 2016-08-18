@@ -10,7 +10,7 @@ import Snackbar from 'material-ui/Snackbar';
 import Toggle from 'material-ui/Toggle';
 import Paper from 'material-ui/Paper';
 import './sign.scss';
-import styles from './signStyle.js';
+import styles from './signStyles.js';
 import { checkemail,checkpw } from '../common/check.js';
 import { sessionAction,emailErrAction,emailRegAction,pwErrAction,signupAction } from '../actions/signupAction.js';
 import { captchaAction,checkCaptchaAction } from '../actions/captchaAction.js';
@@ -36,18 +36,13 @@ class SignUp extends Component {
             return;
         }
         this.props.dispatch(captchaAction());
-        //console.log(this);
     }
 
-    //sessionToggle() {
-    //    // 更改 保持登录 状态
-    //    this.props.dispatch(sessionAction({sessionToggle: !this.props.signup.session}));
-    //    console.log(this);
-    //}
 
     componentWillUnmount() {
         this.props.dispatch(checkCaptchaAction(false));
     }
+
     updateCaptcha() {
         // 更新验证码 并重置 验证码 input
         this.props.dispatch(captchaAction());
@@ -192,7 +187,7 @@ class SignUp extends Component {
                       <Snackbar
                             open={this.props.error.status}
                             message={this.props.error.msg}
-                            autoHideDuration={5000}
+                            autoHideDuration={3000}
                             onRequestClose={(open) => { this.props.error.status ? this.props.dispatch(errorAction({status: false, msg: ''})) : false }}
                             />
                   </Card>

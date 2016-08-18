@@ -8,30 +8,10 @@ import { Step, Stepper,StepButton,StepContent } from 'material-ui/Stepper';
 import { cyan50,cyan100,cyan200,cyan300,cyan500,cyan700 } from 'material-ui/styles/colors';
 import RaisedButton from 'material-ui/RaisedButton';
 import FlatButton from 'material-ui/FlatButton';
+import styles from './personalStyles.js';
 import './personal.scss';
-
 import { updateStepAction,getPersonalAction } from '../actions/personalAction.js';
-const styles = {
-    CardHeaderTitle: {
-        color: cyan500,
-        fontSize: 24,
-        paddingBottom: 6
-    },
-    subTitle: {
-        color: cyan100
-    },
-    cardHeader: {
-        paddingLeft: 26,
-        paddingRight: 26,
-        paddingTop: 20,
-        paddingBottom: 20
-    },
-    cardText: {
-        paddingLeft: 26,
-        paddingRight: 26,
-        paddingTop: 0
-    }
-}
+
 class Personal extends Component {
     _method() {
         return ['renderStepActions', 'nextHandle', 'prevHandle', 'stepHandle']
