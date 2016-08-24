@@ -5,8 +5,8 @@
 
 .user_email {
       position: absolute !important;
-      top: 0;
-      right: 100px;
+      top: 2px;
+      right: 140px;
       line-height: 50px;
       font-size: 1.4rem;
       font-weight: 900;
