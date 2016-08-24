@@ -1,0 +1,33 @@
+.home_wrapper {
+      position: relative;
+      padding: 0 5%;
+      width: 90%;
+      height: 100%;
+
+}
+
+.home_inner {
+      display:table;
+      margin: auto;
+      width: 90%;
+      height: 100%;
+      z-index: 1;
+
+}
+
+.home_logo {
+      display:table-cell;
+      width: 100%;
+      vertical-align: middle;
+}
+
+.img {
+      width: 100%;
+}
+
+.p {
+      color: #80DEEA;
+      font-size: 1.8rem;
+      font-weight: bold;
+      text-align: center;
+}

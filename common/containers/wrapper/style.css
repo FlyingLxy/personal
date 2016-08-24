@@ -1,0 +1,64 @@
+
+.wrapper_inner {
+      height: 100%;
+}
+
+.user_email {
+      position: absolute !important;
+      top: 0;
+      right: 100px;
+      line-height: 50px;
+      font-size: 1.4rem;
+      font-weight: 900;
+      color: #ffffff;
+      z-index: 2;
+}
+
+.menu_btn {
+      position: absolute !important;
+      top: 6px;
+      right: 0;
+      z-index: 2;
+}
+
+.drawer {
+      background-color: #00BCD4 !important;
+      color: #ffffff !important;
+}
+
+.drawer_item {
+      font-weight: bold !important;
+      color: #ffffff !important;
+      height: 60px !important;
+      line-height: 58px !important;
+      text-align: center !important;
+}
+
+
+
+/*.menu {*/
+      /*width: 40px;*/
+      /*height: 50px;*/
+      /*margin-right: 10px;*/
+      /*padding: 10px 5px;*/
+      /*vertical-align: middle;*/
+      /*text-align: center;*/
+/*}*/
+
+/*.git_icon {*/
+      /*width: 30px;*/
+      /*height: 30px;*/
+      /*margin-top: 2px;*/
+/*}*/
+
+/*.git {*/
+      /*width: 40px;*/
+      /*height: 50px;*/
+      /*padding: 10px 5px;*/
+      /*vertical-align: middle;*/
+      /*text-align: center;*/
+/*}*/
+
+/*.btn_color {*/
+      /*btnColor: '#ffffff';*/
+/*}*/

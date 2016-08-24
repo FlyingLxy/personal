@@ -6,7 +6,7 @@ const env = {
     MODE: 'production',
     PORT: 80,
     //HOST: '192.168.199.210',
-    LOCALHOST: 'http://172.16.33.44:3000',
+    LOCALHOST: 'http://172.16.33.43:3000',
     //LOCALHOST: 'http://192.168.199.210:3000'
 }
 
