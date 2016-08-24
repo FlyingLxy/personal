@@ -1,0 +1,6 @@
+{
+  "restartable": "rs",
+  "ignore": [".git","node_modules"],
+  "verbose": true,
+  "watch": ["webpack.config.babel.js","server"]
+}

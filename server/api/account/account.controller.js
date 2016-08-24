@@ -1,10 +1,10 @@
 /**
  * Created by lxy on 16/8/11.
  */
+import path from 'path';
 const ccap = require('ccap');
 const db = require('../../models/db.js');
 const auth = require('../../middleware/auth.js');
-
 
 const userInfo = (body, ip, headers) => {
     return {
@@ -116,5 +116,8 @@ module.exports = {
     },
     authorization: (req,res) => {
         res.json({msg: 'ok'})
+    },
+    download: (req,res) => {
+        res.download(path.resolve(__dirname,'../../../download/lxy.docx'),'郎啸宇.docx')
     }
 }
