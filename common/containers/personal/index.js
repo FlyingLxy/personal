@@ -144,7 +144,6 @@ class _Personal extends Component {
                                                                     )
                                                                 })
                                                             }
-
                                                         </div>
                                                   )
                                               })
