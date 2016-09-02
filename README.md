@@ -2,6 +2,9 @@
 
 ## 安装&运行
 * Node.js v6.2.0
+* Ruby v1.9
+* gcc++ v4.8+
+* python v2.7
 
 ## 开发:
 
